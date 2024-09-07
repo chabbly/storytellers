@@ -46,13 +46,17 @@ networkx==3.3
 numpy==2.1.1
     # via accelerate
     # via diffusers
+    # via opencv-python-headless
     # via transformers
+opencv-python-headless==4.10.0.84
+    # via storytellers
 packaging==24.1
     # via accelerate
     # via huggingface-hub
     # via transformers
 pillow==10.4.0
     # via diffusers
+    # via storytellers
 psutil==6.0.0
     # via accelerate
 pyyaml==6.0.2
