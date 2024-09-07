@@ -28,6 +28,16 @@ def get_image():
     # Convert to PIL Image
     pil_image = Image.fromarray(rgb_frame)
 
+    # Resize to 512x512, cropping if necessary
+    width, height = pil_image.size
+    min_dimension = min(width, height)
+    left = (width - min_dimension) // 2
+    top = (height - min_dimension) // 2
+    right = left + min_dimension
+    bottom = top + min_dimension
+
+    pil_image = pil_image.resize((512, 512))
+
     return pil_image
 
 
