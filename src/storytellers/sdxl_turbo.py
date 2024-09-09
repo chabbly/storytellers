@@ -22,15 +22,7 @@ i2i_pipe.to("mps")
 i2i_pipe.set_progress_bar_config(disable=True)
 
 
-def resize_crop(image, size=512):
-    image = image.convert("RGB")
-    w, h = image.size
-    image = image.resize((size, int(size * (h / w))), Image.BICUBIC)
-    return image
-
-
 def predict(init_image, prompt, strength, steps, seed=1231231):
-    init_image = resize_crop(init_image)
     generator = torch.manual_seed(seed)
     last_time = time.time()
 
