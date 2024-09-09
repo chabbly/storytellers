@@ -8,7 +8,13 @@ camera = cv2.VideoCapture(0)
 def resize_crop(image, width=512):
     image = image.convert("RGB")
     w, h = image.size
-    image = image.resize((width, int(width * (h / w))), Image.BICUBIC)
+    # assume w > h
+    left = (w - h) // 2
+    top = 0
+    right = left + h
+    bottom = h
+    image = image.crop((left, top, right, bottom))
+    image = image.resize((width, width), Image.BICUBIC)
     return image
 
 
