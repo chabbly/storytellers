@@ -8,9 +8,7 @@ def main() -> int:
     try:
         while True:
             webcam_frame = camera.get_image()
-            image = sdxl.predict(
-                webcam_frame, "a scene from a Philip K. Dick novel", 0.7, 2
-            )
+            image = sdxl.predict(webcam_frame, "cubism meets pointillism", 0.7, 2)
             viewer.show_image(image)
     except KeyboardInterrupt:
         pass
