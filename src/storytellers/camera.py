@@ -17,6 +17,12 @@ def get_image():
         print("Error: Could not open camera.")
         return None
 
+    # Set camera parameters for brightness (not working yet)
+    # camera.set(cv2.CAP_PROP_BRIGHTNESS, 255)  # Adjust brightness (0-255)
+    # this is a *gross* way to set a hex value
+    # camera.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
+    # camera.set(cv2.CAP_PROP_EXPOSURE, -7)  # Adjust exposure (-7 to -1 for manual mode)
+
     ret, frame = camera.read()
     if not ret:
         print("Error: Could not read frame.")
@@ -27,16 +33,6 @@ def get_image():
 
     # Convert to PIL Image
     pil_image = Image.fromarray(rgb_frame)
-
-    # Resize to 512x512, cropping if necessary
-    width, height = pil_image.size
-    min_dimension = min(width, height)
-    left = (width - min_dimension) // 2
-    top = (height - min_dimension) // 2
-    right = left + min_dimension
-    bottom = top + min_dimension
-
-    pil_image = pil_image.resize((512, 512))
 
     return pil_image
 
