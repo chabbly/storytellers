@@ -4,6 +4,8 @@ from PIL import Image
 import time
 import math
 
+IMAGE_SIZE = 256
+
 # code adapted from https://huggingface.co/spaces/diffusers/unofficial-SDXL-Turbo-i2i-t2i
 
 i2i_pipe = AutoPipelineForImage2Image.from_pretrained(
@@ -22,9 +24,23 @@ i2i_pipe.to("mps")
 i2i_pipe.set_progress_bar_config(disable=True)
 
 
+def resize_crop(image, width=IMAGE_SIZE):
+    image = image.convert("RGB")
+    w, h = image.size
+    # assume w > h
+    left = (w - h) // 2
+    top = 0
+    right = left + h
+    bottom = h
+    image = image.crop((left, top, right, bottom))
+    image = image.resize((width, width), Image.NEAREST)
+    return image
+
+
 def predict(init_image, prompt, strength, steps, seed=1231231):
     generator = torch.manual_seed(seed)
     last_time = time.time()
+    init_image = resize_crop(init_image)
 
     if int(steps * strength) < 1:
         steps = math.ceil(1 / max(0.10, strength))
@@ -36,8 +52,8 @@ def predict(init_image, prompt, strength, steps, seed=1231231):
         num_inference_steps=steps,
         guidance_scale=0.0,
         strength=strength,
-        width=512,
-        height=512,
+        width=256,
+        height=256,
         output_type="pil",
     )
     print(f"Pipe took {time.time() - last_time} seconds")

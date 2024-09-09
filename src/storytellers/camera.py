@@ -5,19 +5,6 @@ from PIL import Image
 camera = cv2.VideoCapture(0)
 
 
-def resize_crop(image, width=512):
-    image = image.convert("RGB")
-    w, h = image.size
-    # assume w > h
-    left = (w - h) // 2
-    top = 0
-    right = left + h
-    bottom = h
-    image = image.crop((left, top, right, bottom))
-    image = image.resize((width, width), Image.BICUBIC)
-    return image
-
-
 def get_image():
     """
     Captures and returns the current webcam image as a PIL Image.
@@ -45,9 +32,9 @@ def get_image():
     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
     # Convert to PIL Image
-    pil_image = Image.fromarray(rgb_frame)
+    image = Image.fromarray(rgb_frame)
 
-    return resize_crop(pil_image)
+    return image
 
 
 def cleanup():
