@@ -11,9 +11,18 @@ def main() -> int:
     frame_index = 1
     try:
         while True:
+            import time
+
+            start_time = time.time()
+
             webcam_frame = image_utils.resize_crop(
                 image_utils.get_camera_frame(), IMAGE_SIZE
             )
+            print(
+                f"Webcam frame processing time: {time.time() - start_time:.4f} seconds"
+            )
+
+            video_frame_start = time.time()
             video_frame = image_utils.resize_crop(
                 assets.read_image("nggyu", frame_index), IMAGE_SIZE
             )
@@ -22,11 +31,27 @@ def main() -> int:
                 video_frame = assets.read_image("nggyu", frame_index)
             else:
                 frame_index += 1
+            print(
+                f"Video frame processing time: {time.time() - video_frame_start:.4f} seconds"
+            )
+
+            chroma_key_start = time.time()
             image = image_utils.chroma_key(video_frame, webcam_frame)
+            print(
+                f"Chroma key processing time: {time.time() - chroma_key_start:.4f} seconds"
+            )
+
+            predict_start = time.time()
             image = gen_ai.predict(
                 image, "cubism meets pointillism", IMAGE_SIZE, 0.2, 1
             )
+            print(f"AI prediction time: {time.time() - predict_start:.4f} seconds")
+
+            viewer_start = time.time()
             viewer.show_image(image)
+            print(f"Image display time: {time.time() - viewer_start:.4f} seconds")
+
+            print(f"Total loop time: {time.time() - start_time:.4f} seconds")
     except KeyboardInterrupt:
         pass
     finally:
