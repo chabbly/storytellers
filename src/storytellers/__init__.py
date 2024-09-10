@@ -4,7 +4,7 @@ import storytellers.image as image_utils
 import storytellers.assets as assets
 # from diffusers.utils import load_image
 
-IMAGE_SIZE = 512
+IMAGE_SIZE = 256
 
 
 def main() -> int:
@@ -14,14 +14,18 @@ def main() -> int:
             webcam_frame = image_utils.resize_crop(
                 image_utils.get_camera_frame(), IMAGE_SIZE
             )
-            video_frame = assets.read_image("nggyu", frame_index)
+            video_frame = image_utils.resize_crop(
+                assets.read_image("nggyu", frame_index), IMAGE_SIZE
+            )
             if video_frame is None:
                 frame_index = 1
                 video_frame = assets.read_image("nggyu", frame_index)
             else:
                 frame_index += 1
             image = image_utils.chroma_key(video_frame, webcam_frame)
-            # image = ai.predict(image, "cubism meets pointillism", IMAGE_SIZE, 0.3, 2)
+            image = gen_ai.predict(
+                image, "cubism meets pointillism", IMAGE_SIZE, 0.2, 1
+            )
             viewer.show_image(image)
     except KeyboardInterrupt:
         pass
