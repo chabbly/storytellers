@@ -1,10 +1,9 @@
+import storytellers.image as image
 from diffusers import AutoPipelineForImage2Image
 import torch
 from PIL import Image
 import time
 import math
-
-IMAGE_SIZE = 256
 
 # code adapted from https://huggingface.co/spaces/diffusers/unofficial-SDXL-Turbo-i2i-t2i
 
@@ -24,23 +23,10 @@ i2i_pipe.to("mps")
 i2i_pipe.set_progress_bar_config(disable=True)
 
 
-def resize_crop(image, width=IMAGE_SIZE):
-    image = image.convert("RGB")
-    w, h = image.size
-    # assume w > h
-    left = (w - h) // 2
-    top = 0
-    right = left + h
-    bottom = h
-    image = image.crop((left, top, right, bottom))
-    image = image.resize((width, width), Image.NEAREST)
-    return image
-
-
-def predict(init_image, prompt, strength, steps, seed=1231231):
+def predict(init_image, prompt, size, strength, steps, seed=1231231):
     generator = torch.manual_seed(seed)
     last_time = time.time()
-    init_image = resize_crop(init_image)
+    init_image = image.resize_crop(init_image, size)
 
     if int(steps * strength) < 1:
         steps = math.ceil(1 / max(0.10, strength))
@@ -52,8 +38,8 @@ def predict(init_image, prompt, strength, steps, seed=1231231):
         num_inference_steps=steps,
         guidance_scale=0.0,
         strength=strength,
-        width=256,
-        height=256,
+        width=size,
+        height=size,
         output_type="pil",
     )
     print(f"Pipe took {time.time() - last_time} seconds")
@@ -63,5 +49,5 @@ def predict(init_image, prompt, strength, steps, seed=1231231):
         else False
     )
     if nsfw_content_detected:
-        return Image.new("RGB", (512, 512))
+        return Image.new("RGB", (size, size))
     return results.images[0]
