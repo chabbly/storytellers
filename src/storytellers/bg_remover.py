@@ -2,22 +2,20 @@ from PIL import Image
 import numpy as np
 
 
-def apply(image):
-    # Convert image to numpy array
-    img_array = np.array(image)
+def combine(bottom_image, top_image):
+    # Convert images to numpy arrays
+    bottom_array = np.array(bottom_image)
+    top_array = np.array(top_image)
 
     # Define the white-ish color range
     lower_white = np.array([180, 180, 180])
     upper_white = np.array([255, 255, 255])
 
     # Create a mask for white-ish pixels
-    mask = np.all((img_array >= lower_white) & (img_array <= upper_white), axis=-1)
+    mask = np.all((top_array >= lower_white) & (top_array <= upper_white), axis=-1)
 
-    # Create an alpha channel
-    alpha = np.where(mask, 0, 255).astype(np.uint8)
-
-    # Add alpha channel to the image
-    result = np.dstack((img_array, alpha))
+    # Use the mask to combine the images
+    result = np.where(mask[:, :, np.newaxis], bottom_array, top_array)
 
     # Convert back to PIL Image
     return Image.fromarray(result)
