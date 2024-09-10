@@ -57,7 +57,7 @@ def chroma_key(source_image, key_image):
     key_array = np.array(key_image)
 
     # Define the white-ish color range
-    lower_white = np.array([180, 180, 180])
+    lower_white = np.array([150, 150, 150])
     upper_white = np.array([255, 255, 255])
 
     # Create a mask for white-ish pixels
