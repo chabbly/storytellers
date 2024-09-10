@@ -11,12 +11,9 @@ i2i_pipe = AutoPipelineForImage2Image.from_pretrained(
     torch_dtype=torch.float16,
     variant="fp16",
 )
-# t2i_pipe = AutoPipelineForText2Image.from_pretrained(
-#     "stabilityai/sdxl-turbo",
-#     safety_checker=None,
-#     torch_dtype=torch_dtype,
-#     variant="fp16" if torch_dtype == torch.float16 else "fp32",
-# )
+
+# this doesn't work on mps
+# i2i_pipe.unet = torch.compile(i2i_pipe.unet, mode="reduce-overhead", fullgraph=True)
 
 i2i_pipe.to("mps")
 i2i_pipe.set_progress_bar_config(disable=True)
