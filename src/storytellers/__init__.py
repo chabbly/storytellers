@@ -5,6 +5,8 @@ import storytellers.assets as assets
 # from diffusers.utils import load_image
 
 IMAGE_SIZE = 256
+# IMAGE_PROMPT = "cubism meets pointillism"
+IMAGE_PROMPT = "a cool, comfortable cave, moss growing on the walls"
 
 
 def main() -> int:
@@ -42,9 +44,7 @@ def main() -> int:
             )
 
             predict_start = time.time()
-            image = gen_ai.predict(
-                image, "cubism meets pointillism", IMAGE_SIZE, 0.2, 1
-            )
+            image = gen_ai.predict(image, IMAGE_PROMPT, IMAGE_SIZE, 0.4, 2)
             print(f"AI prediction time: {time.time() - predict_start:.4f} seconds")
 
             viewer_start = time.time()
