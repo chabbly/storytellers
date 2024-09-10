@@ -39,12 +39,16 @@ huggingface-hub==0.24.6
     # via transformers
 idna==3.8
     # via requests
+imageio==2.35.1
+    # via scikit-image
 importlib-metadata==8.4.0
     # via diffusers
 jinja2==3.1.4
     # via torch
 kiwisolver==1.4.7
     # via matplotlib
+lazy-loader==0.4
+    # via scikit-image
 markupsafe==2.1.5
     # via jinja2
 matplotlib==3.9.2
@@ -52,25 +56,36 @@ matplotlib==3.9.2
 mpmath==1.3.0
     # via sympy
 networkx==3.3
+    # via scikit-image
     # via torch
 numpy==2.1.1
     # via accelerate
     # via contourpy
     # via diffusers
+    # via imageio
     # via matplotlib
     # via opencv-python-headless
+    # via scikit-image
+    # via scipy
+    # via tifffile
+    # via torchvision
     # via transformers
 opencv-python-headless==4.10.0.84
     # via storytellers
 packaging==24.1
     # via accelerate
     # via huggingface-hub
+    # via lazy-loader
     # via matplotlib
+    # via scikit-image
     # via transformers
 pillow==10.4.0
     # via diffusers
+    # via imageio
     # via matplotlib
+    # via scikit-image
     # via storytellers
+    # via torchvision
 psutil==6.0.0
     # via accelerate
 pyparsing==3.1.4
@@ -92,16 +107,25 @@ safetensors==0.4.5
     # via accelerate
     # via diffusers
     # via transformers
+scikit-image==0.24.0
+    # via storytellers
+scipy==1.14.1
+    # via scikit-image
 setuptools==74.1.2
     # via torch
 six==1.16.0
     # via python-dateutil
 sympy==1.13.2
     # via torch
+tifffile==2024.8.30
+    # via scikit-image
 tokenizers==0.19.1
     # via transformers
 torch==2.4.1
     # via accelerate
+    # via torchvision
+torchvision==0.19.1
+    # via storytellers
 tqdm==4.66.5
     # via huggingface-hub
     # via transformers
