@@ -51,7 +51,7 @@ def main() -> int:
             viewer.show_image(image)
             print(f"Image display time: {time.time() - viewer_start:.4f} seconds")
 
-            print(f"Total loop time: {time.time() - start_time:.4f} seconds")
+            print(f"Total loop time: {time.time() - start_time:.4f} seconds\n")
     except KeyboardInterrupt:
         pass
     finally:
