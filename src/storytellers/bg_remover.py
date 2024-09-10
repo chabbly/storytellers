@@ -6,16 +6,12 @@ def apply(image):
     # Convert image to numpy array
     img_array = np.array(image)
 
-    # Calculate luminance
-    luminance = (
-        0.299 * img_array[:, :, 0]
-        + 0.587 * img_array[:, :, 1]
-        + 0.114 * img_array[:, :, 2]
-    )
+    # Define the white-ish color range
+    lower_white = np.array([180, 180, 180])
+    upper_white = np.array([255, 255, 255])
 
-    # Create a mask based on luminance threshold (adjust as needed)
-    threshold = 200  # Higher values keep darker pixels
-    mask = luminance > threshold
+    # Create a mask for white-ish pixels
+    mask = np.all((img_array >= lower_white) & (img_array <= upper_white), axis=-1)
 
     # Create an alpha channel
     alpha = np.where(mask, 0, 255).astype(np.uint8)
