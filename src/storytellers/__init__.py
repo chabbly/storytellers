@@ -44,7 +44,7 @@ def main() -> int:
             )
 
             predict_start = time.time()
-            image = gen_ai.predict(image, IMAGE_PROMPT, IMAGE_SIZE, 0.4, 2)
+            image = gen_ai.predict(image, IMAGE_PROMPT, IMAGE_SIZE, 0.3, 2)
             print(f"AI prediction time: {time.time() - predict_start:.4f} seconds")
 
             viewer_start = time.time()
