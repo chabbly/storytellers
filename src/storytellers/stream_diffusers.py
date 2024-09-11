@@ -18,8 +18,8 @@ stream = StreamDiffusion(
 )
 
 # If the loaded model is not LCM, merge LCM
-stream.load_lcm_lora()
-stream.fuse_lora()
+# stream.load_lcm_lora()
+# stream.fuse_lora()
 # Use Tiny VAE for further acceleration
 stream.vae = AutoencoderTiny.from_pretrained("madebyollin/taesd").to(
     device=pipe.device, dtype=pipe.dtype
