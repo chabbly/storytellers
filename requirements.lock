@@ -12,6 +12,9 @@
 -e file:.
 accelerate==0.34.2
     # via storytellers
+    # via streamdiffusion
+antlr4-python3-runtime==4.9.3
+    # via omegaconf
 certifi==2024.8.30
     # via requests
 charset-normalizer==3.3.2
@@ -20,13 +23,16 @@ contourpy==1.3.0
     # via matplotlib
 cycler==0.12.1
     # via matplotlib
-diffusers==0.30.2
+diffusers==0.24.0
     # via storytellers
+    # via streamdiffusion
 filelock==3.15.4
     # via diffusers
     # via huggingface-hub
     # via torch
     # via transformers
+fire==0.6.0
+    # via streamdiffusion
 fonttools==4.53.1
     # via matplotlib
 fsspec==2024.9.0
@@ -70,6 +76,8 @@ numpy==2.1.1
     # via tifffile
     # via torchvision
     # via transformers
+omegaconf==2.3.0
+    # via streamdiffusion
 opencv-python-headless==4.10.0.84
     # via storytellers
 packaging==24.1
@@ -95,6 +103,7 @@ python-dateutil==2.9.0.post0
 pyyaml==6.0.2
     # via accelerate
     # via huggingface-hub
+    # via omegaconf
     # via transformers
 regex==2024.7.24
     # via diffusers
@@ -114,9 +123,14 @@ scipy==1.14.1
 setuptools==74.1.2
     # via torch
 six==1.16.0
+    # via fire
     # via python-dateutil
+streamdiffusion @ git+https://github.com/cumulo-autumn/StreamDiffusion@765d71029b1404b94aee2865178d71c257c20318
+    # via storytellers
 sympy==1.13.2
     # via torch
+termcolor==2.4.0
+    # via fire
 tifffile==2024.8.30
     # via scikit-image
 tokenizers==0.19.1
@@ -131,6 +145,7 @@ tqdm==4.66.5
     # via transformers
 transformers==4.44.2
     # via storytellers
+    # via streamdiffusion
 typing-extensions==4.12.2
     # via huggingface-hub
     # via torch
