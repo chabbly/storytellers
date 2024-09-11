@@ -6,7 +6,7 @@ import storytellers.assets as assets
 
 IMAGE_SIZE = 256
 # IMAGE_PROMPT = "cubism meets pointillism"
-IMAGE_PROMPT = "a cool, comfortable cave, moss growing on the walls"
+IMAGE_PROMPT = "the world is made of moss and rocks, but the humans are chuds"
 
 
 def main() -> int:
