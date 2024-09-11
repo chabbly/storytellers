@@ -12,6 +12,11 @@ Note: currently set up for use on an Apple Silicon Mac, but should work with an
 NVIDIA card too (in fact, would probably work better). You'll just need to grep
 through the codebase and change all the `"mps"`s to `"cuda"`.
 
+Note: video files aren't committed to this repo, because (a) we don't have the
+licence to put them on GitHub and (b) they'd bloat the repo anyway. So to use
+this, create your own video frames---see [the assets readme](/assets/README.md)
+for more info.
+
 ## Use
 
 1. ensure you've got your image frames in `assets/<video_name>/`
