@@ -32,6 +32,11 @@ for more info.
 - test with the actual videos
 - sound
 - move from using matplotlib (gross!) to something nicer for the display
+- modulate the "generative-ness" setting over time
+- we need to find a way to preserve the integrity of the original footage while maximising the integration and expressiveness of the user input. Some ideas for how to do this are:
+  - segment the film around the user input and do generative fill instead of combining the user input and frame
+  - layer a low opacity copy of the film over the generative frame + input image so that the generated image is showing through the original
+  - pad the user input with a border of white to make it pop
 
 ## Licence
 
