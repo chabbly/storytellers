@@ -25,14 +25,14 @@ def main() -> int:
             )
 
             video_frame_start = time.time()
-            video_frame = image_utils.resize_crop(
-                assets.read_image("nggyu", frame_index), IMAGE_SIZE
-            )
+            video_frame = assets.read_image("nggyu", frame_index)
             if video_frame is None:
                 frame_index = 1
                 video_frame = assets.read_image("nggyu", frame_index)
             else:
                 frame_index += 1
+
+            video_frame = image_utils.resize_crop(video_frame, IMAGE_SIZE)
             print(
                 f"Video frame processing time: {time.time() - video_frame_start:.4f} seconds"
             )
