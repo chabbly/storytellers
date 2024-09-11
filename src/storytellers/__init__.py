@@ -2,11 +2,21 @@ import storytellers.viewer as viewer
 import storytellers.gen_ai as gen_ai
 import storytellers.image as image_utils
 import storytellers.assets as assets
+
 # from diffusers.utils import load_image
+import math
 
 IMAGE_SIZE = 256
 # IMAGE_PROMPT = "cubism meets pointillism"
 IMAGE_PROMPT = "the world is made of moss and rocks, but the humans are chuds"
+
+
+def breathe(frame_index):
+    normalized = (frame_index % 5) * (2 * math.pi / 5)
+    sin_value = math.sin(normalized)
+    scaled_value = 0.5 + sin_value * 0.4
+
+    return scaled_value
 
 
 def main() -> int:
